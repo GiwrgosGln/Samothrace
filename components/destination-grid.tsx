@@ -1,10 +1,9 @@
+import { BlurView } from "expo-blur";
 import React, { useState } from "react";
 import {
   View,
   Text,
   ImageBackground,
-  StyleSheet,
-  SafeAreaView,
   TouchableOpacity,
   ScrollView,
 } from "react-native";
@@ -14,163 +13,128 @@ const destinations = [
     title: "Sanctuary of the Great Gods",
     image:
       "https://www.insamothraki.com/poze/a/cover/the-sanctuary-of-the-great-gods-81sm6.jpg",
-    category: "Other",
+    category: "Sights",
   },
   {
     title: "Fonias Waterfalls",
     image: "https://example.com/images/fonias-waterfalls.jpg",
-    category: "Other",
+    category: "Waterfalls",
   },
   {
-    title: "Pachia Ammos Beach",
-    image: "https://example.com/images/pachia-ammos-beach.jpg",
-    category: "Beaches",
+    title: "Pachia Ammos",
+    image:
+      "https://www.travel.gr/wp-content/uploads/2023/05/93.-samothraki-paxia-ammos-064072-scaled.jpg",
+    category: "Beach",
   },
   {
-    title: "Vatos Beach",
-    image: "https://example.com/images/vatos-beach.jpg",
-    category: "Beaches",
+    title: "Vatos",
+    image:
+      "https://www.insamothraki.com/poze/a/cover/vatos-beach-samothraki-28213.jpg",
+    category: "Beach",
   },
-  // Add more destinations with their respective categories
 ];
 
-const DestinationsGrid = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+const categories = ["Beach", "Waterfalls", "Sights", "Mountain"];
 
-  // Function to filter destinations based on selected category
-  const filteredDestinations =
-    selectedCategory === "All"
-      ? destinations
-      : destinations.filter(
-          (destination) => destination.category === selectedCategory
-        );
+const DestinationsGrid = () => {
+  const [selectedCategory, setSelectedCategory] = useState("Beach");
+
+  const filteredDestinations = destinations.filter(
+    (destination) => destination.category === selectedCategory
+  );
 
   return (
     <>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={[
-            styles.button,
-            selectedCategory === "All" && styles.selectedButton,
-          ]}
-          onPress={() => setSelectedCategory("All")}
+      <View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            flexDirection: "row",
+            justifyContent: "center",
+            paddingBottom: 10,
+          }}
         >
-          <Text
-            style={[
-              styles.buttonText,
-              selectedCategory === "All" && styles.selectedButtonText,
-            ]}
-          >
-            All
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.button,
-            selectedCategory === "Beaches" && styles.selectedButton,
-          ]}
-          onPress={() => setSelectedCategory("Beaches")}
-        >
-          <Text
-            style={[
-              styles.buttonText,
-              selectedCategory === "Beaches" && styles.selectedButtonText,
-            ]}
-          >
-            Beaches
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.button,
-            selectedCategory === "Other" && styles.selectedButton,
-          ]}
-          onPress={() => setSelectedCategory("Other")}
-        >
-          <Text
-            style={[
-              styles.buttonText,
-              selectedCategory === "Other" && styles.selectedButtonText,
-            ]}
-          >
-            Other
-          </Text>
-        </TouchableOpacity>
+          {categories.map((category) => (
+            <TouchableOpacity
+              key={category}
+              style={{
+                paddingHorizontal: 20,
+                paddingVertical: 10,
+                marginHorizontal: 5,
+                alignItems: "center",
+                marginBottom: 10,
+              }}
+              onPress={() => setSelectedCategory(category)}
+            >
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: selectedCategory === category ? "black" : "gray",
+                  fontWeight: selectedCategory === category ? 700 : 300,
+                }}
+              >
+                {category}
+              </Text>
+              {selectedCategory === category && (
+                <View
+                  style={{
+                    height: 4,
+                    width: 4,
+                    backgroundColor: "black",
+                    borderRadius: 2,
+                    marginTop: 2,
+                  }}
+                />
+              )}
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       </View>
 
-      {/* Destinations grid */}
-      <View style={styles.destinationsContainer}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {filteredDestinations.map((destination, index) => (
-          <View key={index} style={styles.destinationItem}>
+          <View
+            key={index}
+            style={{
+              width: 220,
+              marginRight: 25,
+            }}
+          >
             <ImageBackground
               source={{ uri: destination.image }}
-              style={styles.imageBackground}
+              style={{
+                width: "100%",
+                height: 300,
+                justifyContent: "flex-end",
+                alignItems: "center",
+                overflow: "hidden",
+                borderRadius: 10,
+              }}
               imageStyle={{ borderRadius: 10 }}
             >
-              <Text style={styles.title}>{destination.title}</Text>
+              <BlurView
+                tint="dark"
+                intensity={100}
+                style={{ width: "100%", height: 60, justifyContent: "center" }}
+              >
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: "white",
+                  }}
+                >
+                  {destination.title}
+                </Text>
+              </BlurView>
             </ImageBackground>
           </View>
         ))}
-      </View>
+      </ScrollView>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginBottom: 10,
-  },
-  button: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginHorizontal: 5,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    backgroundColor: "#f0f0f0",
-  },
-  selectedButton: {
-    backgroundColor: "#183cfe",
-  },
-  buttonText: {
-    fontSize: 16,
-    color: "#333",
-  },
-  selectedButtonText: {
-    color: "#fff",
-  },
-  destinationsContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    paddingHorizontal: 10,
-  },
-  destinationItem: {
-    width: "45%",
-    marginVertical: 10,
-  },
-  imageBackground: {
-    width: "100%",
-    height: 150,
-    justifyContent: "flex-end",
-    alignItems: "center",
-    overflow: "hidden",
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
-    color: "#fff",
-    paddingVertical: 5,
-    width: "100%",
-  },
-});
 
 export default DestinationsGrid;
