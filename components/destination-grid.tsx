@@ -17,7 +17,7 @@ const destinations = [
   },
   {
     title: "Fonias Waterfalls",
-    image: "https://example.com/images/fonias-waterfalls.jpg",
+    image: "https://www.in.gr/wp-content/uploads/2018/08/fonias.png",
     category: "Waterfalls",
   },
   {
@@ -120,8 +120,8 @@ const DestinationsGrid = () => {
               >
                 <Text
                   style={{
-                    fontSize: 20,
-                    fontWeight: "bold",
+                    fontSize: 18,
+                    fontWeight: "semibold",
                     textAlign: "center",
                     color: "white",
                   }}

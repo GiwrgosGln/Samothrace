@@ -1,6 +1,6 @@
 import { Tabs } from "expo-router";
 import React from "react";
-
+import { View } from "react-native";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 
 export default function TabLayout() {
@@ -9,7 +9,7 @@ export default function TabLayout() {
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: "black",
+        tabBarActiveTintColor: "#6879f8",
         tabBarInactiveTintColor: "gray",
         tabBarShowLabel: false,
         tabBarStyle: {
@@ -21,37 +21,70 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="discover"
         options={{
-          title: "Home",
+          title: "Discover",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? "home" : "home-outline"}
+              name={focused ? "compass-sharp" : "compass-outline"}
               color={color}
             />
           ),
         }}
       />
-
       <Tabs.Screen
         name="weather"
         options={{
           title: "Weather",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? "cloud-sharp" : "cloud-outline"}
+              name={focused ? "boat-sharp" : "boat-outline"}
               color={color}
             />
           ),
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="index"
         options={{
-          title: "Settings",
+          title: "Home",
+          tabBarIcon: ({ color, focused }) => (
+            <View
+              style={{
+                backgroundColor: "#6879f8",
+                position: "absolute",
+                bottom: 10,
+                padding: 20,
+                borderRadius: 20,
+              }}
+            >
+              <TabBarIcon
+                name={focused ? "home" : "home-outline"}
+                color={"white"}
+              />
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="ye"
+        options={{
+          title: "Ye",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? "settings-sharp" : "settings-outline"}
+              name={focused ? "radio-sharp" : "radio-outline"}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? "person-sharp" : "person-outline"}
               color={color}
             />
           ),
