@@ -33,9 +33,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="weather"
+        name="services"
         options={{
-          title: "Weather",
+          title: "Services",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "boat-sharp" : "boat-outline"}
@@ -67,9 +67,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="ye"
+        name="news"
         options={{
-          title: "Ye",
+          title: "News",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "radio-sharp" : "radio-outline"}

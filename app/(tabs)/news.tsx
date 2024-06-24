@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 
-export default function WeatherScreen() {
+export default function NewsScreen() {
   return (
     <View>
-      <Text>Weather</Text>
+      <Text>News</Text>
     </View>
   );
 }
